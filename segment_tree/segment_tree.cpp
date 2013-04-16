@@ -32,17 +32,17 @@ template <class T>
 segment_tree<T>::segment_tree(const std::vector<T>& init_data)
         : size(init_data.size()) {
     tree.resize(4 * init_data.size() + 10);
-    _init(1, 1, init_data.size(), init_data);
+    _init(1, 0, init_data.size() - 1, init_data);
 }
 
 template <class T>
 void segment_tree<T>::update(int left, int right, T value) {
-    _update(1, 1, size, left, right, value);
+    _update(1, 0, size - 1, left, right, value);
 }
 
 template <class T>
 T segment_tree<T>::query(int left, int right) const {
-    return _query(1, 1, size, left, right); 
+    return _query(1, 0, size - 1, left, right); 
 }
 
 template <class T>
@@ -103,8 +103,8 @@ int main()
     int N, M;
     fin >> N >> M;
 
-    std::vector<int> vec(N + 1);
-    for (int i = 1; i <= N; ++i)
+    std::vector<int> vec(N);
+    for (int i = 0; i < N; ++i)
         fin >> vec[i];
 
     segment_tree<int> tree(vec);
@@ -114,8 +114,10 @@ int main()
         fin >> op >> a >> b;
 
         if (op == 0) {
+            --a, --b;
             fout << tree.query(a, b) << std::endl;
         } else {
+            --a;
             tree.update(a, a, b);
         }
     }
