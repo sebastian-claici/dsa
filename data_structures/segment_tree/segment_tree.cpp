@@ -9,6 +9,7 @@ class segment_tree {
 public:
     explicit segment_tree(int size);
     explicit segment_tree(const std::vector<T>& init_data);
+    ~segment_tree();
 
     void update(int left, int right, T value);
     T query(int left, int right) const;
@@ -20,7 +21,7 @@ private:
     T _query(int node, int left, int right, int x, int y) const;
 
     int size;
-    std::vector<T> tree;
+    T *tree;
 };
 
 template <class T>
@@ -30,7 +31,7 @@ segment_tree<T>::segment_tree(int _size): size(_size) {
         sz *= 2;
     sz *= 2;
 
-    tree.resize(sz);
+    tree = new T[sz];
 }
 
 template <class T>
@@ -41,9 +42,14 @@ segment_tree<T>::segment_tree(const std::vector<T>& init_data)
         sz *= 2;
     sz *= 2;
 
-    tree.resize(sz);
+    tree = new T[sz];
 
     _init(1, 0, init_data.size() - 1, init_data);
+}
+
+template <class T>
+segment_tree<T>::~segment_tree() {
+    delete[] tree;
 }
 
 template <class T>
