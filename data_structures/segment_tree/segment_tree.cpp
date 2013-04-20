@@ -28,6 +28,8 @@ segment_tree<T>::segment_tree(int _size): size(_size) {
     int sz = 1;
     while (sz <= _size)
         sz *= 2;
+    sz *= 2;
+
     tree.resize(sz);
 }
 
@@ -37,6 +39,8 @@ segment_tree<T>::segment_tree(const std::vector<T>& init_data)
     int sz = 1;
     while (sz <= init_data.size())
         sz *= 2;
+    sz *= 2;
+
     tree.resize(sz);
 
     _init(1, 0, init_data.size() - 1, init_data);
