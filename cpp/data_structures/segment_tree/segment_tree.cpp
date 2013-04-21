@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <fstream>
+#include <functional>
 #include <iostream>
+#include <iterator>
 #include <limits>
 #include <vector>
 
@@ -8,15 +10,16 @@ template <class T>
 class segment_tree {
 public:
     explicit segment_tree(int size);
-    explicit segment_tree(const std::vector<T>& init_data);
+    template <class ForwardIterator>
+        explicit segment_tree(ForwardIterator begin, ForwardIterator end);
     ~segment_tree();
 
     void update(int left, int right, T value);
     T query(int left, int right) const;
 
 private:
-    void _init(int node, int left, int right, 
-               const std::vector<T>& init_data);
+    template <class ForwardIterator> 
+        void _init(int node, int left, int right, ForwardIterator& iter);
     void _update(int node, int left, int right, int x, int y, T value);
     T _query(int node, int left, int right, int x, int y) const;
 
@@ -35,16 +38,21 @@ segment_tree<T>::segment_tree(int _size): size(_size) {
 }
 
 template <class T>
-segment_tree<T>::segment_tree(const std::vector<T>& init_data)
-        : size(init_data.size()) {
+template <class ForwardIterator>
+segment_tree<T>::segment_tree(ForwardIterator begin, ForwardIterator end) {
+    size = 0;
+    ForwardIterator it = begin;
+    while (it++ != end)
+        ++size;
+
     int sz = 1;
-    while (sz <= init_data.size())
+    while (sz <= size)
         sz *= 2;
     sz *= 2;
 
     tree = new T[sz];
 
-    _init(1, 0, init_data.size() - 1, init_data);
+    _init(1, 0, size - 1, begin); 
 }
 
 template <class T>
@@ -63,22 +71,30 @@ T segment_tree<T>::query(int left, int right) const {
 }
 
 template <class T>
+template <class ForwardIterator>
 void segment_tree<T>::_init(int node, int left, int right, 
-                            const std::vector<T>& init_data) {
+        ForwardIterator& iter) { 
     if (left == right) {
-        tree[node] = init_data[left];
+        tree[node] = *iter++;
     } else {
         int mid = left + (right - left) / 2;
-        _init(2 * node, left, mid, init_data);
-        _init(2 * node + 1, mid + 1, right, init_data);
+        _init(2 * node, left, mid, iter);
+        _init(2 * node + 1, mid + 1, right, iter);
 
-        tree[node] = std::max(tree[2 * node], tree[2 * node + 1]);
+        T left_val = tree[2 * node];
+        T right_val = tree[2 * node + 1];
+
+        if (left_val > right_val) {
+            tree[node] = left_val;
+        } else {
+            tree[node] = right_val;
+        }
     }
 }
 
 template <class T>
 void segment_tree<T>::_update(int node, int left, int right, 
-                              int x, int y, T value) {
+        int x, int y, T value) {
     if (x <= left && right <= y) {
         tree[node] = value;
     } else {
@@ -88,14 +104,21 @@ void segment_tree<T>::_update(int node, int left, int right,
             _update(2 * node, left, mid, x, y, value);
         if (y > mid)
             _update(2 * node + 1, mid + 1, right, x, y, value);
-        
-        tree[node] = std::max(tree[2 * node], tree[2 * node + 1]);
+
+        T left_val = tree[2 * node];
+        T right_val = tree[2 * node + 1];
+
+        if (left_val > right_val) {
+            tree[node] = left_val;
+        } else {
+            tree[node] = right_val;
+        }
     }
 }
 
 template <class T>
 T segment_tree<T>::_query(int node, int left, int right, 
-                          int x, int y) const {
+        int x, int y) const {
     if (x <= left && right <= y) {
         return tree[node];
     } else {
@@ -106,8 +129,8 @@ T segment_tree<T>::_query(int node, int left, int right,
             value = std::max(value, _query(2 * node, left, mid, x, y));
         if (y > mid)
             value = std::max(value, _query(2 * node + 1, mid + 1, 
-                                           right, x, y));
-
+                        right, x, y));
+        
         return value;
     }
 }
@@ -124,7 +147,7 @@ int main()
     for (int i = 0; i < N; ++i)
         fin >> vec[i];
 
-    segment_tree<int> tree(vec);
+    segment_tree<int> tree(vec.begin(), vec.end());
 
     for (int i = 0; i < M; ++i) {
         int op, a, b;
@@ -138,6 +161,6 @@ int main()
             tree.update(a, a, b);
         }
     }
-    
+
     return 0;
 }
