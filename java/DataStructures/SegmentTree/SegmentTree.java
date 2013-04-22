@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -104,10 +105,10 @@ public class SegmentTree<T extends Comparable<? super T>> {
 	 * initValue.get(x).
 	 * 
 	 * @param initValues
-	 *            List with initial values on intervals of size 1.
+	 *            Collection with initial values on intervals of size 1.
 	 */
 	@SuppressWarnings("unchecked")
-	public SegmentTree(List<T> initValues) {
+	public SegmentTree(Collection<T> initValues) {
 		size = initValues.size();
 		comparator = null;
 
@@ -126,13 +127,13 @@ public class SegmentTree<T extends Comparable<? super T>> {
 	 * initValue.get(x). The comparison function is given by comparator.
 	 * 
 	 * @param initValues
-	 *            List with initial values on intervals of size 1.
+	 *            Collection with initial values on intervals of size 1.
 	 * @param comparator
 	 *            Comparator that dictates how larger intervals are constructed
 	 *            according to their children.
 	 */
 	@SuppressWarnings("unchecked")
-	public SegmentTree(List<T> initValues, Comparator<T> comparator) {
+	public SegmentTree(Collection<T> initValues, Comparator<T> comparator) {
 		size = initValues.size();
 		this.comparator = comparator;
 
