@@ -1,9 +1,15 @@
 #include <fstream>
 #include <vector>
 
+// Implementation of a Fenwick tree data structure.
+//
+// A Fenwick tree or binary indexed tree is a data structure providing
+// efficient methods for calculation and manipulation of the prefix sums
+// of a table of values.
 class fenwick_tree {
 public:
-    explicit fenwick_tree(const std::vector<int>& vals);
+    template <class ForwardIterator>
+    explicit fenwick_tree(ForwardIterator begin, ForwardIterator end);
     explicit fenwick_tree(const int _size);
     ~fenwick_tree();
 
@@ -17,22 +23,46 @@ private:
     int *tree;
 };
 
-fenwick_tree::fenwick_tree(const std::vector<int>& vals)
-        : size(vals.size()) {
-    tree = new int[vals.size() + 1];
-    for (int i = 0; i < vals.size(); ++i) 
-        update(i + 1, vals[i]); 
+// Constructs a Fenwick tree from the range [begin, end). Each element
+// in the resulting tree will hold the cumulative frequency up to
+// that point.
+//
+// Args:
+//      begin: iterator pointing to the beginning of the range
+//      end: iterator pointing to the end of the range
+template <class ForwardIterator>
+fenwick_tree::fenwick_tree(ForwardIterator begin, ForwardIterator end) {
+    size = 0;
+    ForwardIterator it = begin;
+    while (it++ != end)
+        ++size;
+
+    int i = 1;
+    tree = new int[size + 1];
+    while (begin != end) 
+        update(i++, *begin++); 
 }
 
+// Constructs a Fenwick tree of a specified size. Each element in the
+// tree will be initially 0. Because Fenwick trees are 1-indexed, the 
+// created tree is one more than the size given as an argument.
+//
+// Args:
+//      _size: size of the tree to be constructed
 fenwick_tree::fenwick_tree(const int _size) 
         : size(_size) {
     tree = new int[_size + 1];
 }
 
+// Frees all memory held by this data structure.
 fenwick_tree::~fenwick_tree() {
     delete[] tree;
 }
 
+// Queries the cumulative frequency at id.
+//
+// Args:
+//      id: the index (1-based) to query
 int fenwick_tree::query(int id) {
     int sum = 0;
     while (id > 0) {
@@ -43,10 +73,21 @@ int fenwick_tree::query(int id) {
     return sum;
 }
 
+// Queries the cumulative frequency in the range [left, right].
+//
+// Args:
+//      left: leftmost index (1-based) of the interval to be queried
+//      right: rightmost index (1-based) of the interval to be queried
 int fenwick_tree::query(int left, int right) {
     return query(right) - query(left - 1);
 }
 
+// Update the value at index id to be initial_value + to_add. Returns -1
+// if there is no index satisfying the requirements.
+//
+// Args:
+//      id: index where the update should occur
+//      to_add: amount to add to the element at index id
 void fenwick_tree::update(int id, int to_add) {
     while (id <= size) {
         tree[id] += to_add;
@@ -54,6 +95,12 @@ void fenwick_tree::update(int id, int to_add) {
     }
 }
 
+// Find the index where the cumulative frequency is exactly equal
+// to sum.
+//
+// Args:
+//      sum: the value to which the cumulative frequency must be 
+//          equal to
 int fenwick_tree::find(int sum) {
     int bitmask;
     for (bitmask = 1; bitmask < size; bitmask *= 2);
