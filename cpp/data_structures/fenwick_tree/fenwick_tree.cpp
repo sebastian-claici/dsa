@@ -67,6 +67,9 @@ int fenwick_tree::query(int id) {
     int sum = 0;
     while (id > 0) {
         sum += tree[id];
+        // id & -id is the lowest set bit in id; by subtracting this
+        // from id, we move to the next number whose cumulative
+        // frequency we need to add, but haven't yet added.
         id -= (id & -id);
     }
 
@@ -91,6 +94,9 @@ int fenwick_tree::query(int left, int right) {
 void fenwick_tree::update(int id, int to_add) {
     while (id <= size) {
         tree[id] += to_add;
+        // id & -id is the lowest set bit in id; by adding this
+        // to id, we move to the next highest number that 
+        // not have the lowest bit in id set.
         id += (id & -id);
     }
 }
