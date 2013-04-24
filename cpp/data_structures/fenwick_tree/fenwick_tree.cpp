@@ -6,6 +6,8 @@
 // A Fenwick tree or binary indexed tree is a data structure providing
 // efficient methods for calculation and manipulation of the prefix sums
 // of a table of values.
+//
+// For more information: http://en.wikipedia.org/wiki/Fenwick_tree
 class fenwick_tree {
 public:
     template <class ForwardIterator>
