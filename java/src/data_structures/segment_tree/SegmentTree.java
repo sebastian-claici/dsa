@@ -1,3 +1,5 @@
+package data_structures.segment_tree;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -288,4 +290,3 @@ public class SegmentTree<T extends Comparable<? super T>> {
 		}
 	}
 }
-

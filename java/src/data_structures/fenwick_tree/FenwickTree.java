@@ -1,3 +1,5 @@
+package data_structures.fenwick_tree;
+
 import java.util.Collection;
 
 /**

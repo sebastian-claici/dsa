@@ -1,3 +1,5 @@
+package data_structures.disjoint_set;
+
 /**
  * This class implements a disjoint-set data structure.
  * 
