@@ -10,7 +10,7 @@ import java.util.StringTokenizer;
 public class RoyFloyd {
 
     /**
-     * Representation of an undirected graph.
+     * Representation of a Graph data structure.
      */
     public static class Graph {
         private final boolean[][] adjacencyMatrix;
@@ -34,9 +34,7 @@ public class RoyFloyd {
         }
 
         /**
-         * Add an edge between two nodes of certain cost. Because
-         * the graph is undirected the effect is to add two edges:
-         * one between src and dst, and one between dst and src.
+         * Add an edge between two nodes of certain cost.
          *
          * @param src Source node.
          * @param dst Destination node.
@@ -44,9 +42,7 @@ public class RoyFloyd {
          */
         public void addEdge(int src, int dst, int cost) {
             adjacencyMatrix[src][dst] = true;
-            adjacencyMatrix[dst][src] = true;
             costMatrix[src][dst] = cost;
-            costMatrix[dst][src] = cost;
         }
 
         /**
@@ -57,15 +53,16 @@ public class RoyFloyd {
         public int[][] royFloyd() {
             int[][] result = new int[size][size];
             for (int i = 0; i < size; ++i)
-                for (int j = 0; j < size; ++j)
+                for (int j = 0; j < size; ++j) {
                     result[i][j] = costMatrix[i][j];
+                    if (i != j && result[i][j] == 0)
+                        result[i][j] = Integer.MAX_VALUE / 2 - 1;
+                }
 
             //Try to find a better path for each pair (i, j) through an auxiliary node k.
             for (int k = 0; k < size; ++k)
                 for (int i = 0; i < size; ++i)
                     for (int j = 0; j < size; ++j) {
-                        if (!adjacencyMatrix[i][k] || !adjacencyMatrix[k][j] || i == j)
-                            continue;
                         result[i][j] = Math.min(result[i][j], result[i][k] + result[k][j]);
                     }
 
