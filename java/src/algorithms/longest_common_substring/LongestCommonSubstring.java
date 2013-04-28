@@ -61,6 +61,48 @@ public class LongestCommonSubstring {
         return result;
     }
 
+    public static String longestCommonSubstring(String A, String B) {
+        /*
+         * best[i][j] - length of the longest common substring between
+         *      A[0..i] and B[0..j]
+         *
+         * best[i][j] is computed as follows:
+         *      best[i][j] = best[i - 1][j - 1] + 1, if A[i - 1] == B[j - 1]
+         *          (we can extend the longest substring by 1)
+         *      best[i][j] = max(best[i - 1][j], best[i][j - 1]) otherwise
+         */
+        int[][] best = new int[A.length() + 1][B.length() + 1];
+
+        for (int i = 1; i <= A.length(); ++i) {
+            for (int j = 1; j <= B.length(); ++j) {
+                if (A.charAt(i - 1) == B.charAt(j - 1)) {
+                    best[i][j] = best[i - 1][j - 1] + 1;
+                } else {
+                    best[i][j] = Math.max(best[i - 1][j], best[i][j - 1]);
+                }
+            }
+        }
+
+        int size = best[A.length()][B.length()];
+        char[] result = new char[size];
+
+        // Build the result by walking the best array backwards
+        int i = A.length(), j = B.length();
+        while (i != 0 && j != 0) {
+            if (A.charAt(i - 1) == B.charAt(j - 1)) {
+                result[--size] = A.charAt(i - 1);
+                --i;
+                --j;
+            } else if (best[i - 1][j] > best[i][j - 1]) {
+                --i;
+            } else {
+                --j;
+            }
+        }
+
+        return new String(result);
+    }
+
     // Test code
     public static void main(String[] args) throws Exception {
         BufferedReader buf = new BufferedReader(new FileReader("lcs.in"));
