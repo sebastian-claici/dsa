@@ -41,7 +41,8 @@ public class RoyFloyd {
          * @param cost Cost of the edge.
          */
         public void addEdge(int src, int dst, int cost) {
-            adjacencyMatrix[src][dst] = true;
+            if (cost != 0)
+                adjacencyMatrix[src][dst] = true;
             costMatrix[src][dst] = cost;
         }
 
