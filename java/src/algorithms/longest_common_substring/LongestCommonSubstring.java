@@ -5,33 +5,53 @@ import java.io.FileReader;
 import java.util.StringTokenizer;
 
 /**
+ * Implementation of the longest common substring dynamic programming algorithm.
+ *
+ * The longest common substring problem is to find the longest string that is a
+ * substring of two or more strings.
+ *
+ * Example: the longest common substring of the strings "ABABC" and "BABCA" is
+ * "ABC".
+ *
+ * Time complexity: O(N * M), where N and M are the lengths of the two strings.
+ *
  * @author Sebastian Claici
  */
 public class LongestCommonSubstring {
 
     public static int[] longestCommonSubstring(int[] A, int[] B) {
-        int[][] dp = new int[A.length + 1][B.length + 1];
+        /*
+         * best[i][j] - length of the longest common substring between
+         *      A[0..i] and B[0..j]
+         *
+         * best[i][j] is computed as follows:
+         *      best[i][j] = best[i - 1][j - 1] + 1, if A[i - 1] == B[j - 1]
+         *          (we can extend the longest substring by 1)
+         *      best[i][j] = max(best[i - 1][j], best[i][j - 1]) otherwise
+         */
+        int[][] best = new int[A.length + 1][B.length + 1];
 
         for (int i = 1; i <= A.length; ++i) {
             for (int j = 1; j <= B.length; ++j) {
                 if (A[i - 1] == B[j - 1]) {
-                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                    best[i][j] = best[i - 1][j - 1] + 1;
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    best[i][j] = Math.max(best[i - 1][j], best[i][j - 1]);
                 }
             }
         }
 
-        int size = dp[A.length][B.length];
+        int size = best[A.length][B.length];
         int[] result = new int[size];
 
+        // Build the result by walking the best array backwards
         int i = A.length, j = B.length;
         while (i != 0 && j != 0) {
             if (A[i - 1] == B[j - 1]) {
                 result[--size] = A[i - 1];
                 --i;
                 --j;
-            } else if (dp[i - 1][j] > dp[i][j - 1]) {
+            } else if (best[i - 1][j] > best[i][j - 1]) {
                 --i;
             } else {
                 --j;
@@ -41,6 +61,7 @@ public class LongestCommonSubstring {
         return result;
     }
 
+    // Test code
     public static void main(String[] args) throws Exception {
         BufferedReader buf = new BufferedReader(new FileReader("lcs.in"));
         StringTokenizer st = new StringTokenizer(buf.readLine());
