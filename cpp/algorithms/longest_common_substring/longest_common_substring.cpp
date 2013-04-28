@@ -2,19 +2,38 @@
 #include <fstream>
 #include <vector>
 
+
+// Implementation of the longest common substring dynamic programming 
+// algorithm.
+// 
+// The longest common substring problem is to find the longest string that is a
+// substring of two or more strings.
+// 
+// Example: the longest common substring of the strings "ABABC" and "BABCA" is
+// "ABC".
+// 
+// Time complexity: O(N * M), where N and M are the lengths of the two strings.
 template <class Iterable>
 Iterable longest_common_substring(const Iterable& A,
                                   const Iterable& B)
 {
-    std::vector<std::vector<int> > dp(A.size() + 1, 
+    // best[i][j] - length of the longest common substring between
+    //      A[0..i] and B[0..j]
+    // 
+    // best[i][j] is computed as follows:
+    //      best[i][j] = best[i - 1][j - 1] + 1, if A[i - 1] == B[j - 1]
+    //          (we can extend the longest substring by 1)
+    //      best[i][j] = max(best[i - 1][j], best[i][j - 1]) otherwise
+    // 
+    std::vector<std::vector<int> > best(A.size() + 1, 
             std::vector<int>(B.size() + 1));
 
     for (int i = 1; i <= A.size(); ++i)
         for (int j = 1; j <= B.size(); ++j) {
             if (A[i - 1] == B[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
+                best[i][j] = best[i - 1][j - 1] + 1;
             } else {
-                dp[i][j] = std::max(dp[i - 1][j], dp[i][j - 1]);
+                best[i][j] = std::max(best[i - 1][j], best[i][j - 1]);
             }
         }
 
@@ -25,7 +44,7 @@ Iterable longest_common_substring(const Iterable& A,
         if (A[i - 1] == B[j - 1]) {
             result.push_back(A[i - 1]);
             --i, --j;
-        } else if (dp[i - 1][j] > dp[i][j - 1]) {
+        } else if (best[i - 1][j] > best[i][j - 1]) {
             --i;
         } else {
             --j;
