@@ -9,6 +9,18 @@ The aim of this repository is to provide a central hub with robust implementatio
 
 Most of the inspiration comes from [here](http://www.infoarena.ro/arhiva-educationala). Another website with a similar goal is [here](http://e-maxx.ru/algo/).
 
+Table of Contents
+-----------------
+##### Data structures
+* Fenwick tree: [C++](/cpp/data_structures/fenwick_tree/fenwick_tree.cpp) [Java](/java/src/data_structures/fenwick_tree/FenwickTree.java)
+* Segment tree: [C++](/cpp/data_structures/segment_tree/segment_tree.cpp) [Java](/java/src/data_structures/segment_tree/SegmentTree.java)
+* Disjoint set: [C++](/cpp/data_structures/disjoint_set/disjoint_set.cpp) [Java](/java/src/data_structures/disjoint_set/DisjointSet.java)
+
+##### Algorithms
+* Euclidean algorithm for determining the greatest common divisor: [C++](/cpp/algorithms/euclid_gcd/euclid_gcd.cpp) [Java](/java/src/algorithms/euclid_gcd/GreatestCommonDivisor.java)
+* Longest common substring: [C++](/cpp/algorithms/longest_common_substring/longest_common_substring.cpp) [Java](/java/src/algorithms/longest_common_substring/LongestCommonSubstring.java)
+* Roy-Floyd algorithm for determining the all-pairs shortest paths: [C++](/cpp/algorithms/roy_floyd/roy_floyd.cpp) [Java](/java/src/algorithms/roy_floyd/RoyFloyd.java)
+
 License
 -------
 
