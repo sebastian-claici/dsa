@@ -20,6 +20,7 @@ Table of Contents
 * Euclidean algorithm for determining the greatest common divisor: [C++](/cpp/algorithms/euclid_gcd/euclid_gcd.cpp), [Java](/java/src/algorithms/euclid_gcd/GreatestCommonDivisor.java)
 * Longest common substring: [C++](/cpp/algorithms/longest_common_substring/longest_common_substring.cpp), [Java](/java/src/algorithms/longest_common_substring/LongestCommonSubstring.java)
 * Roy-Floyd algorithm for determining the all-pairs shortest paths: [C++](/cpp/algorithms/roy_floyd/roy_floyd.cpp), [Java](/java/src/algorithms/roy_floyd/RoyFloyd.java)
+* Topological sort: [C++](/cpp/algorithms/topological_sort/topological_sort.cpp), [Java](/java/src/algorithms/topological_sort/TopologicalSort.java)
 
 License
 -------
