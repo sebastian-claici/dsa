@@ -11,16 +11,28 @@ Most of the inspiration comes from [here](http://www.infoarena.ro/arhiva-educati
 
 Table of Contents
 -----------------
-##### Data structures
+#### Data structures
 * Fenwick tree: [C++](/cpp/data_structures/fenwick_tree/fenwick_tree.cpp), [Java](/java/src/data_structures/fenwick_tree/FenwickTree.java)
 * Segment tree: [C++](/cpp/data_structures/segment_tree/segment_tree.cpp), [Java](/java/src/data_structures/segment_tree/SegmentTree.java)
 * Disjoint set: [C++](/cpp/data_structures/disjoint_set/disjoint_set.cpp), [Java](/java/src/data_structures/disjoint_set/DisjointSet.java)
 
-##### Algorithms
+#### Algorithms
+##### Mathematics
 * Euclidean algorithm for determining the greatest common divisor: [C++](/cpp/algorithms/euclid_gcd/euclid_gcd.cpp), [Java](/java/src/algorithms/euclid_gcd/GreatestCommonDivisor.java)
+
+##### Dynamic Programming
 * Longest common substring: [C++](/cpp/algorithms/longest_common_substring/longest_common_substring.cpp), [Java](/java/src/algorithms/longest_common_substring/LongestCommonSubstring.java)
-* Roy-Floyd algorithm for determining the all-pairs shortest paths: [C++](/cpp/algorithms/roy_floyd/roy_floyd.cpp), [Java](/java/src/algorithms/roy_floyd/RoyFloyd.java)
-* Topological sort: [C++](/cpp/algorithms/topological_sort/topological_sort.cpp), [Java](/java/src/algorithms/topological_sort/TopologicalSort.java)
+
+##### Graph algorithms
+* Basic algorithms:
+    * Topological sort: [C++](/cpp/algorithms/topological_sort/topological_sort.cpp), [Java](/java/src/algorithms/topological_sort/TopologicalSort.java)
+
+* Shortest path algorithms:
+    * Roy-Floyd algorithm for determining the all-pairs shortest paths: [C++](/cpp/algorithms/roy_floyd/roy_floyd.cpp), [Java](/java/src/algorithms/roy_floyd/RoyFloyd.java)
+
+##### String algorithms
+* Pattern matching:
+    * Knuth-Morris-Pratt algorithm: [C++](/cpp/algorithms/knuth_morris_pratt/knuth_morris_pratt.cpp), [Java](/java/src/algorithms/knuth_morris_pratt/KnuthMorrisPratt.java)
 
 License
 -------
