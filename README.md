@@ -19,6 +19,7 @@ Table of Contents
 #### Algorithms
 ##### Mathematics
 * Euclidean algorithm for determining the greatest common divisor: [C++](/cpp/algorithms/euclid_gcd/euclid_gcd.cpp), [Java](/java/src/algorithms/euclid_gcd/GreatestCommonDivisor.java)
+* Extended Euclidean algorithm: [C++](/cpp/algorithms/extended_euclid/extended_euclid.cpp), [Java](/java/src/algorithms/extended_euclid/ExtendedEuclid.java)
 * Sieve of Eratosthenes: [C++](/cpp/algorithms/eratosthenes_sieve/eratosthenes_sieve.cpp), [Java](/java/src/algorithms/eratosthenes_sieve/EratosthenesSieve.java)
 
 ##### Dynamic Programming
