@@ -28,6 +28,8 @@ Table of Contents
 ##### Graph algorithms
 * Basic algorithms:
     * Topological sort: [C++](/cpp/algorithms/topological_sort/topological_sort.cpp), [Java](/java/src/algorithms/topological_sort/TopologicalSort.java)
+    * Depth First Search: [C++](/cpp/algorithms/depth_first_search/depth_first_search.cpp), [Java](/java/src/algorithms/depth_first_search/ConnectedComponents.java)
+    * Breadth First Search: [C++](/cpp/algorithms/breadth_first_search/breadth_first_search.cpp), [Java](/java/src/algorithms/breadth_first_search/BreadthFirstSearch.java)
 
 * Shortest path algorithms:
     * Roy-Floyd algorithm for determining the all-pairs shortest paths: [C++](/cpp/algorithms/roy_floyd/roy_floyd.cpp), [Java](/java/src/algorithms/roy_floyd/RoyFloyd.java)
