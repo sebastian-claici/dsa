@@ -46,7 +46,7 @@ public:
         for (int i = 0; i < row; ++i) 
             for (int k = 0; k < mult.col; ++k) 
                 for (int j = 0; j < col; ++j) {
-                    int aux = (*this)(i, j) * mult(j, k);
+                    T aux = (*this)(i, j) * mult(j, k);
                     res(i, k) += aux;
                 }
 
@@ -90,7 +90,7 @@ private:
 
 long long kth_fibonacci(const int k)
 {
-    matrix<int> fib_matrix(2, 2);
+    matrix<long long> fib_matrix(2, 2);
     fib_matrix(0, 0) = 1;
     fib_matrix(0, 1) = 1;
     fib_matrix(1, 0) = 1;
@@ -106,7 +106,7 @@ int main()
 {
     std::cout << kth_fibonacci(20) << "\n"; // 6765
     std::cout << kth_fibonacci(13) << "\n"; // 233
-    std::cout << kth_fibonacci(40) << "\n"; // 102334155
+    std::cout << kth_fibonacci(60) << "\n"; // 102334155
 
     return 0;
 }
