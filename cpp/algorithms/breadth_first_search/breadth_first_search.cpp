@@ -4,25 +4,61 @@
 #include <unordered_map>
 #include <vector>
 
+// Computes the single-source shortest paths from a any node
+// to all the other nodes in the graph.
+//
+// Graph is directed, and weights are all 1 (although the algorithm
+// works if the weights are any constant)
+//
+// Time complexity: O(M), where M is the number of edges.
+//
+// For more information: https://en.wikipedia.org/wiki/Breadth-first_search
 template <class T>
 class graph {
 public:
+    // Creates an empty graph with no nodes and no edges.
     explicit graph() {}
 
+    // Creates a graph with nodes taken from the range [begin, end).
+    //
+    // Args:
+    //      begin: iterator pointing to the beginning of a range
+    //      end: iterator pointing to the end of a range
     template <class ForwardIterator>
     explicit graph(ForwardIterator begin, ForwardIterator end)
         : nodes(begin, end) {}
 
+    // Adds a node to the graph
+    //
+    // Args:
+    //      node: new node to be added
     void add_node(T node) {
         nodes.insert(node);
     }
     
+    // Adds an edge between the nodes src and dst. Adds src and dst to 
+    // the list of nodes.
+    //
+    // Args:
+    //      src: start node of the edge
+    //      dst: end node of the edge
     void add_edge(T src, T dst) {
         nodes.insert(src);
         nodes.insert(dst);
         edges[src].push_back(dst);
     }
 
+    // Finding the shortest paths in an unweighted graph can be 
+    // done by running a breadth-first search over the graph.
+    //
+    // Since the edges are unweighted, the first time we encounter
+    // a node is also at the lowest depth we can encounter it.
+    //
+    // Args:
+    //      src: the source node for the search
+    //
+    // Returns: a map between node and distance from source. If a node
+    //      is unreachable, then the distance is -1.
     std::unordered_map<T, int> distance_map(T src) {
         std::queue<T> q;
         std::unordered_set<T> visited;

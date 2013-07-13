@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <vector>
 
-// Implemenation of a graph data structure. This example only
+// Implementation of a graph data structure. This example only
 // creates directed, unweighted graphs. Each graph is represented by 
 // a set of nodes, and an adjacency list for each node.
 //
