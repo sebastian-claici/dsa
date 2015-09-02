@@ -15,6 +15,7 @@ Table of Contents
 * Fenwick tree: [C++](/cpp/data_structures/fenwick_tree/fenwick_tree.cpp), [Java](/java/src/data_structures/fenwick_tree/FenwickTree.java)
 * Segment tree: [C++](/cpp/data_structures/segment_tree/segment_tree.cpp), [Java](/java/src/data_structures/segment_tree/SegmentTree.java)
 * Disjoint set: [C++](/cpp/data_structures/disjoint_set/disjoint_set.cpp), [Java](/java/src/data_structures/disjoint_set/DisjointSet.java)
+* Trie: [C++](/cpp/data_structures/trie/trie.cpp)
 
 #### Algorithms
 ##### Mathematics
@@ -37,6 +38,15 @@ Table of Contents
 ##### String algorithms
 * Pattern matching:
     * Knuth-Morris-Pratt algorithm: [C++](/cpp/algorithms/knuth_morris_pratt/knuth_morris_pratt.cpp), [Java](/java/src/algorithms/knuth_morris_pratt/KnuthMorrisPratt.java)
+
+Compiling
+---------
+
+To compile the C++ files, run this at a command prompt:
+
+```
+g++ -o test --std=c++11 <filename.cpp>
+```
 
 License
 -------
